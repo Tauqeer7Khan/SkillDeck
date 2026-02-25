@@ -8,7 +8,7 @@ const NotFound = () => {
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
           <div className="mx-auto h-24 w-24 bg-primary-100 rounded-full flex items-center justify-center mb-4">
-            <span className="text-4xl font-bold text-primary-600">404</span>
+            <span className="text-4xl font-bold text-primary">404</span>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Page Not Found</h1>
           <p className="text-muted-foreground mb-8">
@@ -24,7 +24,7 @@ const NotFound = () => {
             <Home className="h-4 w-4 mr-2" />
             Go to Dashboard
           </Link>
-          
+
           <button
             onClick={() => window.history.back()}
             className="btn btn-outline w-full flex items-center justify-center"

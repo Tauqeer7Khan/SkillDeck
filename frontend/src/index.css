@@ -7,17 +7,22 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
+    --background: 248 250 252;
     --foreground: 15 23 42;
     --card: 255 255 255;
     --card-foreground: 15 23 42;
     --border: 226 232 240;
-    --input: 203 213 225;
-    --ring: 59 130 246;
-    --accent: 241 245 249;
-    --accent-foreground: 15 23 42;
-    --muted: 248 250 252;
-    --muted-foreground: 100 116 139;
+    --input: 226 232 240;
+    --ring: 37 99 235;
+    --accent: 6 182 212;
+    --accent-foreground: 255 255 255;
+    --muted: 241 245 249;
+    --muted-foreground: 71 85 105;
+    --success: 22 163 74;
+    --warning: 245 158 11;
+    --error: 220 38 38;
+    --primary: 37 99 235;
+    --primary-hover: 29 78 216;
   }
 
   .dark {
@@ -27,11 +32,16 @@
     --card-foreground: 248 250 252;
     --border: 51 65 85;
     --input: 51 65 85;
-    --ring: 59 130 246;
-    --accent: 30 41 59;
+    --ring: 37 99 235;
+    --accent: 6 182 212;
     --accent-foreground: 248 250 252;
     --muted: 15 23 42;
     --muted-foreground: 148 163 184;
+    --success: 34 197 94;
+    --warning: 251 191 36;
+    --error: 239 68 68;
+    --primary: 59 130 246;
+    --primary-hover: 37 99 235;
   }
 
   * {
@@ -39,66 +49,68 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-200;
+    @apply bg-background text-foreground transition-colors duration-200 ease-in-out;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+    @apply inline-flex items-center justify-center rounded-[12px] px-4 py-[12px] text-sm font-medium transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700;
+    @apply btn bg-primary text-white hover:bg-primary-hover shadow-sm hover:shadow-md;
   }
 
   .btn-secondary {
-    @apply btn bg-secondary-100 text-secondary-900 hover:bg-secondary-200;
+    @apply btn bg-secondary-100 text-secondary-900 hover:bg-secondary-200 shadow-sm hover:shadow-md;
   }
 
   .btn-success {
-    @apply btn bg-success-600 text-white hover:bg-success-700;
+    @apply btn bg-[rgb(var(--success))] text-white hover:opacity-90 shadow-sm hover:shadow-md;
   }
 
   .btn-warning {
-    @apply btn bg-warning-600 text-white hover:bg-warning-700;
+    @apply btn bg-[rgb(var(--warning))] text-white hover:opacity-90 shadow-sm hover:shadow-md;
   }
 
   .btn-error {
-    @apply btn bg-error-600 text-white hover:bg-error-700;
+    @apply btn bg-[rgb(var(--error))] text-white hover:opacity-90 shadow-sm hover:shadow-md;
   }
 
   .btn-outline {
-    @apply btn border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+    @apply btn border border-input bg-background hover:bg-muted text-foreground shadow-sm hover:shadow-md;
   }
 
   .input {
-    @apply flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply flex w-full rounded-[12px] border border-input bg-transparent px-4 py-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 ease-in-out shadow-sm;
   }
 
   .card {
-    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+    @apply rounded-[16px] border border-border bg-card text-card-foreground shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-1;
   }
 
   .card-header {
-    @apply flex flex-col space-y-1.5 p-6;
+    @apply flex flex-col space-y-1.5 p-8;
   }
 
   .card-title {
-    @apply text-2xl font-semibold leading-none tracking-tight;
+    @apply text-xl md:text-2xl font-semibold leading-tight tracking-tight text-foreground;
   }
 
   .card-description {
-    @apply text-sm text-muted-foreground;
+    @apply text-sm text-muted-foreground leading-relaxed;
   }
 
   .card-content {
-    @apply p-6 pt-0;
+    @apply p-8 pt-0;
   }
 
   .card-footer {
-    @apply flex items-center p-6 pt-0;
+    @apply flex items-center p-8 pt-0;
   }
 }
 

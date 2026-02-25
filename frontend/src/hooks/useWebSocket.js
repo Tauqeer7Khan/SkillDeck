@@ -21,7 +21,7 @@ const useWebSocket = (url = null) => {
       }
 
       // Create WebSocket connection
-      const wsUrl = `${process.env.REACT_APP_WS_URL || 'ws://localhost:5000'}?token=${token}`;
+      const wsUrl = `${process.env.REACT_APP_WS_URL || 'ws://localhost:5001'}?token=${token}`;
       ws.current = new WebSocket(wsUrl);
 
       ws.current.onopen = () => {
@@ -43,14 +43,14 @@ const useWebSocket = (url = null) => {
       ws.current.onclose = (event) => {
         console.log('WebSocket disconnected:', event.code, event.reason);
         setIsConnected(false);
-        
+
         // Attempt to reconnect if not a normal closure
         if (event.code !== 1000 && reconnectAttempts.current < maxReconnectAttempts) {
           reconnectAttempts.current++;
           const delay = Math.min(1000 * Math.pow(2, reconnectAttempts.current), 30000);
-          
+
           console.log(`Attempting to reconnect in ${delay}ms (attempt ${reconnectAttempts.current})`);
-          
+
           reconnectTimeout.current = setTimeout(() => {
             connect();
           }, delay);
@@ -73,12 +73,12 @@ const useWebSocket = (url = null) => {
     if (reconnectTimeout.current) {
       clearTimeout(reconnectTimeout.current);
     }
-    
+
     if (ws.current) {
       ws.current.close(1000, 'User disconnected');
       ws.current = null;
     }
-    
+
     setIsConnected(false);
   }, []);
 

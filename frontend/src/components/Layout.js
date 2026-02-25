@@ -83,18 +83,18 @@ const Layout = () => {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top header */}
-        <header className="bg-card shadow-sm border-b border-border">
+        <header className="bg-card shadow-md border-b border-border">
           <div className="flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
             <div className="flex items-center">
               <button
-                className="lg:hidden p-2 -ml-2 mr-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
+                className="lg:hidden p-2 -ml-2 mr-2 rounded-[12px] text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
                 onClick={() => setSidebarOpen(true)}
               >
                 <Menu className="h-6 w-6" />
               </button>
               <div className="lg:hidden flex items-center">
-                <Trophy className="h-6 w-6 text-primary-600" />
-                <span className="ml-2 text-lg font-bold text-foreground">InterviewPrep</span>
+                <Trophy className="h-6 w-6 text-primary" />
+                <span className="ml-2 text-lg font-bold text-foreground tracking-tight">InterviewPrep</span>
               </div>
             </div>
 
@@ -103,7 +103,7 @@ const Layout = () => {
                 <p className="text-sm font-medium text-foreground">{user?.username}</p>
                 <p className="text-xs text-muted-foreground">{user?.email}</p>
               </div>
-              <div className="h-8 w-8 rounded-full bg-primary-600 flex items-center justify-center">
+              <div className="h-9 w-9 rounded-full bg-primary flex items-center justify-center shadow-sm ring-2 ring-primary/20">
                 <span className="text-white text-sm font-medium">
                   {user?.username?.charAt(0).toUpperCase()}
                 </span>
@@ -114,7 +114,7 @@ const Layout = () => {
 
         {/* Page content */}
         <main className="flex-1 overflow-auto">
-          <div className="py-6">
+          <div className="py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <Outlet />
             </div>
@@ -129,11 +129,11 @@ const SidebarContent = ({ navigation, user, isActive, handleLogout, theme, toggl
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-card border-r border-border">
       <div className="flex items-center h-16 flex-shrink-0 px-4 border-b border-border">
-        <Trophy className="h-8 w-8 text-primary-600" />
-        <span className="ml-2 text-xl font-bold text-foreground">InterviewPrep</span>
+        <Trophy className="h-8 w-8 text-primary" />
+        <span className="ml-2 text-xl font-bold text-foreground tracking-tight">InterviewPrep</span>
         {onClose && (
           <button
-            className="ml-auto p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
+            className="ml-auto p-2 rounded-[12px] text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
             onClick={onClose}
           >
             <X className="h-6 w-6" />
@@ -150,13 +150,19 @@ const SidebarContent = ({ navigation, user, isActive, handleLogout, theme, toggl
                 key={item.name}
                 to={item.href}
                 onClick={onClose}
-                className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors ${isActive(item.href)
-                  ? 'bg-primary-600/10 text-primary-600 dark:text-primary-400'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                className={`group relative flex items-center px-4 py-3 my-1 text-sm font-medium rounded-[12px] transition-all duration-200 ease-in-out overflow-hidden ${isActive(item.href)
+                  ? 'bg-primary/10 text-primary dark:text-primary'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground hover:shadow-sm'
                   }`}
               >
-                <Icon className="mr-3 h-5 w-5" />
-                {item.name}
+                {isActive(item.href) && (
+                  <span className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md transition-all duration-200"></span>
+                )}
+                <Icon className={`mr-3 h-5 w-5 transition-transform duration-200 group-hover:scale-110 ${isActive(item.href) ? 'text-primary' : ''}`} />
+                <span className="relative inline-block">
+                  {item.name}
+                  <span className={`absolute left-0 -bottom-1 w-full h-0.5 bg-primary transform origin-left transition-transform duration-200 ${isActive(item.href) ? 'scale-x-0' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                </span>
               </Link>
             );
           })}

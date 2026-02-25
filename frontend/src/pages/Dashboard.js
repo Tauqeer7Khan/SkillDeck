@@ -104,7 +104,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -112,8 +112,8 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-indigo-600 rounded-lg p-6 text-white">
-        <h1 className="text-3xl font-bold mb-2">
+      <div className="bg-gradient-to-r from-primary to-indigo-600 rounded-[16px] p-8 text-white shadow-lg">
+        <h1 className="text-3xl font-bold mb-2 tracking-tight">
           Welcome back, {user?.username}! 👋
         </h1>
         <p className="text-primary-100">
@@ -126,9 +126,9 @@ const Dashboard = () => {
         {statsCards.map((stat, index) => {
           const Icon = stat.icon;
           const colorClasses = {
-            primary: 'bg-primary-100 text-primary-600',
-            success: 'bg-success-100 text-success-600',
-            warning: 'bg-warning-100 text-warning-600',
+            primary: 'bg-primary-100 text-primary',
+            success: 'bg-success-100 text-success',
+            warning: 'bg-warning-100 text-warning',
             secondary: 'bg-secondary-100 text-secondary-600'
           };
 
@@ -136,9 +136,9 @@ const Dashboard = () => {
             <Link
               key={index}
               to={stat.link}
-              className="card hover:shadow-lg transition-shadow cursor-pointer"
+              className="card hover:shadow-lg transition-all duration-200 cursor-pointer"
             >
-              <div className="card-content">
+              <div className="card-content pt-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
@@ -161,37 +161,31 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-semibold text-foreground mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-3">Quick Actions</h2>
+        <div className="flex flex-wrap gap-3">
           {quickActions.map((action, index) => {
             const Icon = action.icon;
             const colorClasses = {
-              primary: 'bg-primary-500 hover:bg-primary-600',
-              success: 'bg-success-500 hover:bg-success-600',
-              warning: 'bg-warning-500 hover:bg-warning-600',
-              secondary: 'bg-secondary-500 hover:bg-secondary-600'
+              primary: 'bg-primary/10 text-primary hover:bg-primary hover:text-white border-primary/20',
+              success: 'bg-success/10 text-success hover:bg-success hover:text-white border-success/20',
+              warning: 'bg-warning/10 text-warning hover:bg-warning hover:text-white border-warning/20',
+              secondary: 'bg-muted text-foreground hover:bg-secondary-600 hover:text-white border-border'
             };
 
             return (
               <Link
                 key={index}
                 to={action.link}
-                className="group"
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-[12px] border text-sm font-medium transition-all duration-200 ${colorClasses[action.color]}`}
               >
-                <div className="card hover:shadow-lg transition-all hover:scale-105">
-                  <div className="card-content">
-                    <div className={`w-12 h-12 rounded-lg ${colorClasses[action.color]} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-1">{action.title}</h3>
-                    <p className="text-sm text-muted-foreground">{action.description}</p>
-                  </div>
-                </div>
+                <Icon className="h-4 w-4 flex-shrink-0" />
+                {action.title}
               </Link>
             );
           })}
         </div>
       </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
@@ -211,10 +205,10 @@ const Dashboard = () => {
                       <p className="font-medium text-foreground truncate">{activity.question?.title}</p>
                       <div className="flex flex-wrap items-center gap-2 sm:space-x-4 mt-1">
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${activity.status === 'solved'
-                            ? 'bg-success-100 text-success-800'
-                            : activity.status === 'attempted'
-                              ? 'bg-warning-100 text-warning-800'
-                              : 'bg-error-100 text-error-800'
+                          ? 'bg-success-100 text-success-800'
+                          : activity.status === 'attempted'
+                            ? 'bg-warning-100 text-warning-800'
+                            : 'bg-error-100 text-error-800'
                           }`}>
                           {activity.status}
                         </span>
@@ -266,7 +260,7 @@ const Dashboard = () => {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-primary-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-primary h-2 rounded-full transition-all duration-300"
                     style={{ width: `${overview?.completionRate || 0}%` }}
                   ></div>
                 </div>
@@ -275,13 +269,13 @@ const Dashboard = () => {
               {/* User Stats */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-4 bg-muted rounded-lg">
-                  <p className="text-2xl font-bold text-primary-600">
+                  <p className="text-2xl font-bold text-primary">
                     {user?.stats?.averageScore || 0}%
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">Average Score</p>
                 </div>
                 <div className="text-center p-4 bg-muted rounded-lg">
-                  <p className="text-2xl font-bold text-success-600">
+                  <p className="text-2xl font-bold text-success">
                     {user?.stats?.totalQuestionsSolved || 0}
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">Problems Solved</p>
@@ -290,7 +284,7 @@ const Dashboard = () => {
 
               {/* Experience Level */}
               <div className="text-center p-4 bg-gradient-to-r from-primary-50 to-indigo-50 rounded-lg">
-                <Award className="h-8 w-8 text-primary-600 mx-auto mb-2" />
+                <Award className="h-8 w-8 text-primary mx-auto mb-2" />
                 <p className="font-semibold text-foreground">
                   {user?.profile?.experience?.charAt(0).toUpperCase() + user?.profile?.experience?.slice(1) || 'Beginner'}
                 </p>

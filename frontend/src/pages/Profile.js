@@ -86,7 +86,7 @@ const Profile = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Profile</h1>
+          <h1 className="text-3xl font-bold text-foreground tracking-tight">Profile</h1>
           <p className="mt-2 text-muted-foreground">Manage your account information and preferences</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -130,12 +130,12 @@ const Profile = () => {
           {/* User Card */}
           <div className="card">
             <div className="card-content text-center">
-              <div className="mx-auto h-24 w-24 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <div className="mx-auto h-24 w-24 bg-primary rounded-full flex items-center justify-center mb-4 shadow-md ring-4 ring-primary/10">
                 <span className="text-3xl font-bold text-white">
                   {user?.username?.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <h2 className="text-xl font-bold text-foreground">{user?.username}</h2>
+              <h2 className="text-xl font-bold text-foreground tracking-tight">{user?.username}</h2>
               <p className="text-muted-foreground">{user?.email}</p>
 
               <div className="mt-4 flex items-center justify-center">
@@ -153,21 +153,21 @@ const Profile = () => {
             </div>
             <div className="card-content space-y-4">
               <div className="text-center p-4 bg-muted rounded-lg">
-                <p className="text-2xl font-bold text-primary-600">
+                <p className="text-2xl font-bold text-primary">
                   {user?.stats?.totalQuestionsSolved || 0}
                 </p>
                 <p className="text-sm text-muted-foreground">Problems Solved</p>
               </div>
 
               <div className="text-center p-4 bg-muted rounded-lg">
-                <p className="text-2xl font-bold text-success-600">
+                <p className="text-2xl font-bold text-success">
                   {user?.stats?.averageScore || 0}%
                 </p>
                 <p className="text-sm text-muted-foreground">Average Score</p>
               </div>
 
               <div className="text-center p-4 bg-muted rounded-lg">
-                <p className="text-2xl font-bold text-warning-600">
+                <p className="text-2xl font-bold text-warning">
                   {Math.round((user?.stats?.totalTimeSpent || 0) / 60)}h
                 </p>
                 <p className="text-sm text-muted-foreground">Time Spent</p>

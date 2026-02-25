@@ -160,7 +160,7 @@ const Practice = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -182,7 +182,7 @@ const Practice = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Practice Mode</h1>
+          <h1 className="text-2xl font-bold text-foreground tracking-tight">Practice Mode</h1>
           <p className="text-muted-foreground">Solve random questions to improve your skills</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -278,7 +278,7 @@ const Practice = () => {
                 <div>
                   <button
                     onClick={() => setShowHints(!showHints)}
-                    className="flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                    className="flex items-center text-primary hover:text-primary-hover font-medium transition-colors duration-200"
                   >
                     <Lightbulb className="h-4 w-4 mr-2" />
                     {showHints ? 'Hide' : 'Show'} Hints

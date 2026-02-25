@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       colors: {
         primary: {
+          DEFAULT: 'rgb(var(--primary))',
+          hover: 'rgb(var(--primary-hover))',
           50: '#eff6ff',
           100: '#dbeafe',
           200: '#bfdbfe',
@@ -32,6 +34,7 @@ module.exports = {
           900: '#0f172a',
         },
         success: {
+          DEFAULT: 'rgb(var(--success))',
           50: '#f0fdf4',
           100: '#dcfce7',
           200: '#bbf7d0',
@@ -44,6 +47,7 @@ module.exports = {
           900: '#14532d',
         },
         warning: {
+          DEFAULT: 'rgb(var(--warning))',
           50: '#fffbeb',
           100: '#fef3c7',
           200: '#fde68a',
@@ -56,6 +60,7 @@ module.exports = {
           900: '#78350f',
         },
         error: {
+          DEFAULT: 'rgb(var(--error))',
           50: '#fef2f2',
           100: '#fee2e2',
           200: '#fecaca',
@@ -97,6 +102,9 @@ module.exports = {
           '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+      },
+      transitionDuration: {
+        '250': '250ms',
       },
     },
   },

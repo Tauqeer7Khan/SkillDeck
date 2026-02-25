@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { questionsAPI } from '../services/api';
-import { 
-  Search, 
-  Filter, 
-  ChevronDown, 
-  Clock, 
-  Star, 
+import {
+  Search,
+  Filter,
+  ChevronDown,
+  Clock,
+  Star,
   BookOpen,
   Tag,
   TrendingUp
@@ -26,7 +26,7 @@ const Questions = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const categories = [
-    'array', 'string', 'stack', 'queue', 'linked-list', 
+    'array', 'string', 'stack', 'queue', 'linked-list',
     'tree', 'graph', 'dynamic-programming', 'recursion', 'sorting', 'searching'
   ];
 
@@ -86,7 +86,7 @@ const Questions = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Practice Questions</h1>
+          <h1 className="text-3xl font-bold text-foreground tracking-tight">Practice Questions</h1>
           <p className="mt-2 text-muted-foreground">
             Master data structures and algorithms with our curated problem set
           </p>
@@ -100,7 +100,7 @@ const Questions = () => {
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-card rounded-lg shadow-sm border border-border p-4">
+      <div className="card p-6">
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Search */}
           <div className="flex-1">
@@ -111,7 +111,7 @@ const Questions = () => {
                 placeholder="Search questions by title, description, or tags..."
                 value={filters.search}
                 onChange={handleSearch}
-                className="input pl-10"
+                className="input pl-12"
               />
             </div>
           </div>
@@ -183,7 +183,7 @@ const Questions = () => {
       {/* Questions Grid */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       ) : (
         <>
@@ -194,11 +194,11 @@ const Questions = () => {
                   <Link
                     key={question._id}
                     to={`/questions/${question._id}`}
-                    className="card hover:shadow-lg transition-shadow cursor-pointer group"
+                    className="card hover:shadow-lg transition-all duration-200 cursor-pointer group"
                   >
-                    <div className="card-content">
+                    <div className="card-content pt-6">
                       <div className="flex items-start justify-between mb-3">
-                        <h3 className="font-semibold text-foreground group-hover:text-primary-600 transition-colors line-clamp-2">
+                        <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors duration-200 line-clamp-2">
                           {question.title}
                         </h3>
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[question.difficulty]}`}>
@@ -224,7 +224,7 @@ const Questions = () => {
                             {question.category}
                           </span>
                         </div>
-                        <div className="flex items-center text-primary-600 group-hover:text-primary-700">
+                        <div className="flex items-center text-primary group-hover:text-primary-hover transition-colors duration-200">
                           <span className="text-sm font-medium">Solve</span>
                           <TrendingUp className="h-4 w-4 ml-1" />
                         </div>
@@ -260,7 +260,7 @@ const Questions = () => {
                     {Math.min(pagination.page * pagination.limit, pagination.total)} of{' '}
                     {pagination.total} questions
                   </div>
-                  
+
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handlePageChange(pagination.page - 1)}
@@ -269,7 +269,7 @@ const Questions = () => {
                     >
                       Previous
                     </button>
-                    
+
                     <div className="flex items-center space-x-1">
                       {Array.from({ length: Math.min(5, pagination.pages) }, (_, i) => {
                         const page = i + 1;
@@ -277,18 +277,17 @@ const Questions = () => {
                           <button
                             key={page}
                             onClick={() => handlePageChange(page)}
-                            className={`w-10 h-10 rounded-md flex items-center justify-center text-sm font-medium ${
-                              page === pagination.page
-                                ? 'bg-primary-600 text-white'
+                            className={`w-10 h-10 rounded-md flex items-center justify-center text-sm font-medium ${page === pagination.page
+                                ? 'bg-primary text-white'
                                 : 'text-foreground hover:bg-accent'
-                            }`}
+                              }`}
                           >
                             {page}
                           </button>
                         );
                       })}
                     </div>
-                    
+
                     <button
                       onClick={() => handlePageChange(pagination.page + 1)}
                       disabled={pagination.page === pagination.pages}

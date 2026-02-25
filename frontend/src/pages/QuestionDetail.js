@@ -54,7 +54,7 @@ const QuestionDetail = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -177,7 +177,7 @@ const QuestionDetail = () => {
                   <ul className="space-y-2">
                     {question.constraints.map((constraint, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="text-primary-600 mr-2">•</span>
+                        <span className="text-primary mr-2">•</span>
                         <span className="text-foreground">{constraint}</span>
                       </li>
                     ))}

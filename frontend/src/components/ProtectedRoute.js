@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children, requiredRole = null }) => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-primary-600 mx-auto mb-4" />
+          <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>
