@@ -25,51 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 // Database connection
 const connectDB = async () => {
   try {
-    // Attempt standard connection first with a short timeout
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-    });
-    console.log('MongoDB connected successfully');
-  } catch (err) {
-    console.warn('Standard MongoDB connection error:', err.message);
-    console.log('Falling back to in-memory MongoDB server for testing...');
-    try {
-      const { MongoMemoryServer } = require('mongodb-memory-server');
-      const mongoServer = await MongoMemoryServer.create();
-      const mongoUri = mongoServer.getUri();
-
-      // Update env variable for future connections if needed
-      process.env.MONGODB_URI = mongoUri;
-
-      await mongoose.connect(mongoUri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-      console.log('In-memory MongoDB connected successfully');
-
-      // Auto-seed data for the memory server so user can log in
-      console.log('Seeding in-memory database...');
-      try {
-        const User = require('./models/User');
-        const existingAdmin = await User.findOne({ email: 'admin@interviewprep.com' });
-        if (!existingAdmin) {
-          const user = new User({
-            username: 'admin',
-            email: 'admin@interviewprep.com',
-            password: 'admin123',
-            role: 'admin',
-          });
-          await user.save();
-          console.log('Demo admin user generated (admin@interviewprep.com / admin123)');
-        }
-      } catch (seedErr) {
-        console.error('Failed to seed in-memory db:', seedErr.message);
-      }
-    } catch (memErr) {
-      console.error('Failed to start in-memory MongoDB:', memErr.message);
-    }
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error connecting to MongoDB: ${error.message}`);
+    process.exit(1);
   }
 };
 connectDB();
